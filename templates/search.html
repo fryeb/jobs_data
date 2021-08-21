@@ -1,40 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title> Search </title>
-	<meta charset="utf8"/>
-</head>
-<body>
-	<form action='/' method="GET">
-		<label for="search_occupation"> Your current occupation </label>
-		<input type="text" name="search_occupation" id="search_occupation"
-		    list="list_occupations" defaultValue="{{search_occupation}}"/>
-		<input type="submit"/>
-	</form>
+{% extends 'base.html' %}
+{% block title %}
+Search
+{% endblock %}
 
-	<datalist id="list_occupations">
-		{% for occupation in occupations %}
-		<option>
-		{{ occupation.title }}
-		</option>
-		{% endfor %}
-	</datalist>
+{% block body %}
+<form action='/' method="GET">
+	<label for="search_occupation"> Your current occupation </label>
+	<input type="text" name="search_occupation" id="search_occupation"
+						    list="list_occupations" defaultValue="{{search_occupation}}"/>
+	<input type="submit"/>
+</form>
 
-	{% if search_occupation %}
-	<table>
-		<tr>
-			<th> Code </th>
-			<th> Title </th>
-			<th> Description </th>
-		</tr>
-		{% for occupation in occupations %}
-		<tr>
-			<td> {{occupation.code}} </td>
-			<td> {{occupation.title}} </td>
-			<td> {{occupation.description}} </td>
-		</tr>
-		{% endfor %}
-	</table>
-	{% endif %}
-</body>
-</html>
+<datalist id="list_occupations">
+	{% for occupation in occupations %}
+	<option>
+	{{ occupation.title }}
+	</option>
+	{% endfor %}
+</datalist>
+
+{% if search_occupation %}
+<table>
+	<tr>
+		<th> Title </th>
+	</tr>
+	{% for occupation in occupations %}
+	<tr>
+		<td> 
+			<a href='/occupations/{{occupation.code}}'>
+			{{occupation.title}}
+			</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endif %}
+{% endblock %}
+

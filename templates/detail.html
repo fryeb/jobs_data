@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ occupation.title }}
+{% endblock %}
+
+{% block body %}
+<h1> {{ occupation.title }} </h1>
+<h3> Code: {{ occupation.code }} </h3>
+<h2> Description </h2>
+{{ occupation.description }}
+<h2> Skills </h2>
+{% endblock %}
