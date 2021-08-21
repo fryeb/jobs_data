@@ -42,7 +42,10 @@ def detail(code: int):
 
     occupation = OCCUPATION_DESCRIPTIONS[code]
     occupation_core_competencies = OCCUPATION_CORE_COMPETENCIES[code]
-    technology_tools = OCCUPATION_TECHNOLOGY_TOOLS[code]
+    if code in OCCUPATION_TECHNOLOGY_TOOLS:
+        technology_tools = OCCUPATION_TECHNOLOGY_TOOLS[code]
+    else:
+        technology_tools = []
 
     # This is a very hacky way to do this
     core_competencies = []
