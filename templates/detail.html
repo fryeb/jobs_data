@@ -15,10 +15,21 @@
 {{ occupation.description }}
 <h2> Core Competencies </h2>
 <table>
+	<tr>
+		<td></td>
+		<th>Score<br>({{ occupation.title }})</th>
+		<th>Score<br>({{ current_occupation.title }})</th>
+	</tr>
 	{% for core_competency in core_competencies %}
 	<tr>
 		<th> {{ core_competency.name }} </th>
 		<td> {{ core_competency.score }} </td>
+		<td> {{ core_competency.current }} </td>
+		{% if core_competency.current > core_competency.score %}
+		<td>&#x1F53C;</td>
+		{% elif core_competency.score > core_competency.current %}
+		<td>&#x1F53D;</td>
+		{% endif %}
 	</tr>
 	{% endfor %}
 </table>

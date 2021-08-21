@@ -18,10 +18,19 @@ def detail(code: int):
     current_title = request.args.get('current_occupation')
     current_occupation = OCCUPATION_DESCRIPTIONS[TITLE_TO_CODE[current_title]]
     current_tech_tools = OCCUPATION_TECHNOLOGY_TOOLS[current_occupation.code]
+    current_core_competencies = OCCUPATION_CORE_COMPETENCIES[current_occupation.code]
 
     occupation = OCCUPATION_DESCRIPTIONS[code]
-    core_competencies = OCCUPATION_CORE_COMPETENCIES[code]
+    occupation_core_competencies = OCCUPATION_CORE_COMPETENCIES[code]
     technology_tools = OCCUPATION_TECHNOLOGY_TOOLS[code]
+
+    # This is a very hacky way to do this
+    core_competencies = []
+    for oc_comp in occupation_core_competencies:
+        for cur_comp in current_core_competencies:
+            if oc_comp.name == cur_comp.name:
+                core_competencies.append({'name': oc_comp.name, 'score': oc_comp.score, 'current': cur_comp.score})
+
     return render_template(
             'detail.html',
             occupation=occupation,
