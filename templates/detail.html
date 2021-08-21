@@ -4,6 +4,11 @@
 {% endblock %}
 
 {% block body %}
+{% if current_occupation %}
+<a href='/?current_occupation={{current_occupation}}'> back to search </a>
+{% else %}
+<a href='/'>search for other occupations</a>
+{% endif %}
 <h1> {{ occupation.title }} </h1>
 <h3> Code: {{ occupation.code }} </h3>
 <h2> Description </h2>
