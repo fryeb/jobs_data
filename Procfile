@@ -1,1 +1,1 @@
-web: guincorn aptrlP
+web: gunicorn app:app
