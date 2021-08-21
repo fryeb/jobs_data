@@ -36,7 +36,7 @@ for r in csvrows('data/core_competencies.csv'):
         OCCUPATION_CORE_COMPETENCIES[code] = []
 
     OCCUPATION_CORE_COMPETENCIES[code].append(
-            CoreCompetency(r['Core_Competencies'], r['Score']))
+            CoreCompetency(r['Core_Competencies'], int(r['Score'])))
 
 for r in csvrows('data/technology_tools.csv'):
     code = int(r['ANZSCO_Code'])

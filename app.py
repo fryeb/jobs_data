@@ -16,9 +16,13 @@ def search():
 @app.route('/occupations/<int:code>', methods=['GET'])
 def detail(code: int):
     current_title = request.args.get('current_occupation')
-    current_occupation = OCCUPATION_DESCRIPTIONS[TITLE_TO_CODE[current_title]]
-    current_tech_tools = OCCUPATION_TECHNOLOGY_TOOLS[current_occupation.code]
-    current_core_competencies = OCCUPATION_CORE_COMPETENCIES[current_occupation.code]
+    if current_title:
+        current_occupation = OCCUPATION_DESCRIPTIONS[TITLE_TO_CODE[current_title]]
+        current_tech_tools = OCCUPATION_TECHNOLOGY_TOOLS[current_occupation.code]
+        current_core_competencies = OCCUPATION_CORE_COMPETENCIES[current_occupation.code]
+    else:
+        current_occupation = None
+        current_tech_tools = None
 
     occupation = OCCUPATION_DESCRIPTIONS[code]
     occupation_core_competencies = OCCUPATION_CORE_COMPETENCIES[code]
@@ -27,9 +31,12 @@ def detail(code: int):
     # This is a very hacky way to do this
     core_competencies = []
     for oc_comp in occupation_core_competencies:
-        for cur_comp in current_core_competencies:
-            if oc_comp.name == cur_comp.name:
-                core_competencies.append({'name': oc_comp.name, 'score': oc_comp.score, 'current': cur_comp.score})
+        if current_occupation:
+            for cur_comp in current_core_competencies:
+                if oc_comp.name == cur_comp.name:
+                    core_competencies.append({'name': oc_comp.name, 'score': oc_comp.score, 'current': cur_comp.score})
+        else:
+            core_competencies.append({'name': oc_comp.name, 'score': oc_comp.score})
 
     return render_template(
             'detail.html',

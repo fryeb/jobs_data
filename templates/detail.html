@@ -14,6 +14,8 @@
 <h2> Description </h2>
 {{ occupation.description }}
 <h2> Core Competencies </h2>
+
+{% if current_occupation %}
 <table>
 	<tr>
 		<td></td>
@@ -33,14 +35,28 @@
 	</tr>
 	{% endfor %}
 </table>
+{% else %}
+<table>
+	{% for core_competency in core_competencies %}
+	<tr>
+		<th> {{ core_competency.name }} </th>
+		<td> {{ core_competency.score }} </td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% endif %}
+
 <h2> Technology Tools </h2>
 <ul>
 	{% for technology_tool in technology_tools %}
-	{% if technology_tool in current_tech_tools %}
-	<li> {{ technology_tool }} &#x2705; </li>
-	{% else %}
-	<li> {{ technology_tool }} </li>
-	{% endif %}
+		{% if current_occupation %}
+			{% if technology_tool in current_tech_tools %}
+			<li> {{ technology_tool }} &#x2705; </li>
+			{% else %}
+			<li> {{ technology_tool }} </li>
+			{% endif %}
+		{% endif %}
 	{% endfor %}
 </ul>
 {% endblock %}
