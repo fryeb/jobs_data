@@ -61,5 +61,23 @@
 </ul>
 
 <h2> Specialist Tasks </h2>
-TODO
+<ul>
+{% for family, clusters in task_cluster_families.items() %}
+<li>
+	{{ family }}
+	<ul>
+	{% for cluster, tasks in clusters.items() %}
+	<li>
+		{{ cluster }}
+		<ul>
+		{% for task in tasks %}
+		<li> {{ task }} </li>
+		{% endfor %}
+		</ul>
+	</li>
+	{% endfor %}
+	</ul>
+</li>
+{% endfor %}
+</ul>
 {% endblock %}

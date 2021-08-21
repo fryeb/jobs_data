@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from flask import Flask, request, render_template, jsonify
-from models import TITLE_TO_CODE, OCCUPATION_DESCRIPTIONS, OCCUPATION_CORE_COMPETENCIES, OCCUPATION_TECHNOLOGY_TOOLS
+from models import TITLE_TO_CODE, OCCUPATION_DESCRIPTIONS, OCCUPATION_CORE_COMPETENCIES, OCCUPATION_TECHNOLOGY_TOOLS, SPECIALIST_TASKS
 
 app = Flask(__name__)
 
@@ -57,13 +57,17 @@ def detail(code: int):
         else:
             core_competencies.append({'name': oc_comp.name, 'score': oc_comp.score})
 
+    # Specialist Tasks
+    task_cluster_families = SPECIALIST_TASKS[code]
+
     return render_template(
             'detail.html',
             occupation=occupation,
             core_competencies=core_competencies,
             technology_tools=technology_tools,
             current_occupation=current_occupation,
-            current_tech_tools=current_tech_tools)
+            current_tech_tools=current_tech_tools,
+            task_cluster_families=task_cluster_families)
 
 
 if __name__ == '__main__':
