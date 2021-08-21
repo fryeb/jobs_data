@@ -6,8 +6,13 @@ Search
 {% block body %}
 <form action='/' method="GET">
 	<label for="search_occupation"> Your current occupation </label>
+	{% if current_occupation %}
 	<input type="text" name="current_occupation" id="search_occupation"
 	    list="list_occupations" value="{{current_occupation}}"/>
+	{% else %}
+	<input type="text" name="current_occupation" id="search_occupation"
+	    list="list_occupations"/>
+	{% endif %}
 	<input type="submit"/>
 </form>
 
