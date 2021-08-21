@@ -17,4 +17,14 @@
 	</tr>
 	{% endfor %}
 </table>
+<h2> Technology Tools </h2>
+<ul>
+	{% for technology_tool in technology_tools %}
+	{% if technology_tool in current_tech_tools %}
+	<li> <s> {{ technology_tool }} </s> </li>
+	{% else %}
+	<li> {{ technology_tool }} </li>
+	{% endif %}
+	{% endfor %}
+</ul>
 {% endblock %}

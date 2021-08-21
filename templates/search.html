@@ -6,8 +6,8 @@ Search
 {% block body %}
 <form action='/' method="GET">
 	<label for="search_occupation"> Your current occupation </label>
-	<input type="text" name="search_occupation" id="search_occupation"
-						    list="list_occupations" defaultValue="{{search_occupation}}"/>
+	<input type="text" name="current_occupation" id="search_occupation"
+	    list="list_occupations" defaultValue="{{current_occupation}}"/>
 	<input type="submit"/>
 </form>
 
@@ -19,7 +19,7 @@ Search
 	{% endfor %}
 </datalist>
 
-{% if search_occupation %}
+{% if current_occupation %}
 <table>
 	<tr>
 		<th> Title </th>
@@ -27,7 +27,7 @@ Search
 	{% for occupation in occupations %}
 	<tr>
 		<td> 
-			<a href='/occupations/{{occupation.code}}?search_occupation={{search_occupation}}'>
+			<a href='/occupations/{{occupation.code}}?current_occupation={{current_occupation}}'>
 			{{occupation.title}}
 			</a>
 		</td>
