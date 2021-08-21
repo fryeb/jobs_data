@@ -5,7 +5,7 @@
 
 {% block body %}
 {% if current_occupation %}
-<a href='/?current_occupation={{current_occupation}}'> back to search </a>
+<a href='/?current_occupation={{current_occupation.title}}'> back to search </a>
 {% else %}
 <a href='/'>search for other occupations</a>
 {% endif %}
@@ -26,7 +26,7 @@
 <ul>
 	{% for technology_tool in technology_tools %}
 	{% if technology_tool in current_tech_tools %}
-	<li> <s> {{ technology_tool }} </s> </li>
+	<li> {{ technology_tool }} &#x2705; </li>
 	{% else %}
 	<li> {{ technology_tool }} </li>
 	{% endif %}

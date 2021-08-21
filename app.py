@@ -16,7 +16,6 @@ def search():
 @app.route('/occupations/<int:code>', methods=['GET'])
 def detail(code: int):
     current_title = request.args.get('current_occupation')
-    print(current_title)
     current_occupation = OCCUPATION_DESCRIPTIONS[TITLE_TO_CODE[current_title]]
     current_tech_tools = OCCUPATION_TECHNOLOGY_TOOLS[current_occupation.code]
 
@@ -28,6 +27,7 @@ def detail(code: int):
             occupation=occupation,
             core_competencies=core_competencies,
             technology_tools=technology_tools,
+            current_occupation=current_occupation,
             current_tech_tools=current_tech_tools)
 
 
