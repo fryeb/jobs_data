@@ -5,13 +5,29 @@ from models import TITLE_TO_CODE, OCCUPATION_DESCRIPTIONS, OCCUPATION_CORE_COMPE
 
 app = Flask(__name__)
 
+def compare_occupations(a: str, b: str):
+    a_comps = OCCUPATION_CORE_COMPETENCIES[TITLE_TO_CODE[a]]
+    b_comps = OCCUPATION_CORE_COMPETENCIES[TITLE_TO_CODE[b]]
+    total = 0
+    for a_comp in a_comps:
+        for b_comp in b_comps:
+            if a_comp.name == b_comp.name:
+                total += abs(a_comp.score - b_comp.score)
+    return total
 
 @app.route('/', methods=['GET'])
 def search():
     current_occupation = request.args.get('current_occupation')
+    if current_occupation:
+        occupations = sorted(
+                OCCUPATION_DESCRIPTIONS.values(),
+                key=lambda occupation: compare_occupations(occupation.title, current_occupation))
+    else:
+        occupations = OCCUPATION_DESCRIPTIONS.values()
+
     return render_template('search.html',
             current_occupation=current_occupation,
-            occupations=OCCUPATION_DESCRIPTIONS.values())
+            occupations=occupations)
 
 @app.route('/occupations/<int:code>', methods=['GET'])
 def detail(code: int):
