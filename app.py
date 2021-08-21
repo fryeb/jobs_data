@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from flask import Flask, request, render_template, jsonify
-from models import OCCUPATION_DESCRIPTIONS
+from models import OCCUPATION_DESCRIPTIONS, OCCUPATION_CORE_COMPETENCIES
 
 app = Flask(__name__)
 
@@ -16,7 +16,11 @@ def search():
 @app.route('/occupations/<int:code>', methods=['GET'])
 def detail(code: int):
     occupation = OCCUPATION_DESCRIPTIONS[code]
-    return render_template('detail.html', occupation=occupation)
+    core_competencies = OCCUPATION_CORE_COMPETENCIES[code]
+    return render_template(
+            'detail.html',
+            occupation=occupation,
+            core_competencies=core_competencies)
 
 
 if __name__ == '__main__':

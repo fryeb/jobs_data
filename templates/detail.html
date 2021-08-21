@@ -8,5 +8,13 @@
 <h3> Code: {{ occupation.code }} </h3>
 <h2> Description </h2>
 {{ occupation.description }}
-<h2> Skills </h2>
+<h2> Core Competencies </h2>
+<table>
+	{% for core_competency in core_competencies %}
+	<tr>
+		<th> {{ core_competency.name }} </th>
+		<td> {{ core_competency.score }} </td>
+	</tr>
+	{% endfor %}
+</table>
 {% endblock %}
