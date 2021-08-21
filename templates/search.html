@@ -4,8 +4,9 @@ Search
 {% endblock %}
 
 {% block body %}
+<h1>
 <form action='/' method="GET">
-	<label for="search_occupation"> Your current occupation </label>
+	<label for="search_occupation"> Your current occupation: </label>
 	{% if current_occupation %}
 	<input type="text" name="current_occupation" id="search_occupation"
 	    list="list_occupations" value="{{current_occupation}}"/>
@@ -15,6 +16,7 @@ Search
 	{% endif %}
 	<input type="submit"/>
 </form>
+</h1>
 
 <datalist id="list_occupations">
 	{% for occupation in occupations %}
