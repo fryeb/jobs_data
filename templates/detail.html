@@ -65,13 +65,26 @@
 {% for family, clusters in task_cluster_families.items() %}
 <li>
 	{{ family }}
+	{% if current_task_cluster_families and family in current_task_cluster_families %}
+	&#x2705;
+	{% set current_clusters=current_task_cluster_families[family] %}
+	{% endif %}
 	<ul>
 	{% for cluster, tasks in clusters.items() %}
 	<li>
 		{{ cluster }}
+		{% if current_clusters and cluster in current_clusters %}
+		&#x2705;
+		{% set current_tasks = current_clusters[cluster] %}
+		{% endif %}
+
 		<ul>
 		{% for task in tasks %}
-		<li> {{ task }} </li>
+		<li> {{ task }} 
+		{% if current_tasks and task in current_tasks %}
+		&#x2705;
+		{% endif %}
+		</li>
 		{% endfor %}
 		</ul>
 	</li>

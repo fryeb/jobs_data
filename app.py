@@ -59,6 +59,10 @@ def detail(code: int):
 
     # Specialist Tasks
     task_cluster_families = SPECIALIST_TASKS[code]
+    if current_title:
+        current_task_cluster_families = SPECIALIST_TASKS[TITLE_TO_CODE[current_title]]
+    else:
+        current_task_cluster_families = None
 
     return render_template(
             'detail.html',
@@ -67,7 +71,8 @@ def detail(code: int):
             technology_tools=technology_tools,
             current_occupation=current_occupation,
             current_tech_tools=current_tech_tools,
-            task_cluster_families=task_cluster_families)
+            task_cluster_families=task_cluster_families,
+            current_task_cluster_families=current_task_cluster_families)
 
 
 if __name__ == '__main__':
